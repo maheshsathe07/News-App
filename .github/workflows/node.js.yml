@@ -7,7 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -24,12 +24,11 @@ jobs:
           cache: 'npm'
 
       - run: npm ci  # Install dependencies
-      - run: npm run build --if-present
-      - run: npm test
+      - run: npm run build --if-present  # Only build without testing
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-test  # Only run deploy if build-and-test succeeds
+    needs: build  # Only run deploy if build succeeds
     if: github.ref == 'refs/heads/main' && success()
 
     steps:

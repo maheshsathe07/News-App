@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+// Suppress ReactDOMTestUtils deprecation warning
+console.error = jest.fn();
+
+test('renders NewsApp header in Navbar', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const headerElement = screen.getByText(/NewsApp/i);
+  expect(headerElement).toBeInTheDocument();
 });
